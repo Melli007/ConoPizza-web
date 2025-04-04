@@ -1,0 +1,305 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:wght@100..900&display=swap");
+
+/*================================
+  CSS Variables & Base Styles
+==================================*/
+:root {
+    /* Pizza-inspired Colors */
+    --cheese-yellow: hsl(48, 100%, 65%); /* Warm, melted cheese */
+    --cheese-yellow-alt: hsl(48, 100%, 60%); /* Slightly deeper cheese tone */
+    --tomato-red: hsl(0, 85%, 55%); /* Bright tomato sauce */
+    --tomato-red-dark: hsl(0, 85%, 45%); /* Rich, deep tomato */
+    --basil-green: hsl(120, 50%, 45%); /* Fresh basil green */
+    --basil-green-dark: hsl(120, 50%, 35%); /* Darker basil tone */
+
+    /* Colors */
+    --first-color: hsl(353, 93%, 50%);
+    --first-color-alt: hsl(353, 93%, 46%);
+    --first-color-dark: hsl(353, 50%, 15%);
+    --title-color: hsl(353, 48%, 12%);
+    --text-color: hsl(353, 16%, 32%);
+    --white-color: hsl(24, 86%, 90%);
+    --body-color: hsl(24, 86%, 88%);
+    --container-color: hsl(24, 86%, 92%);
+    /* Typography */
+    --body-font: "Montserrat", sans-serif;
+    --second-font: "Carter One", cursive;
+    /* Font sizes */
+    --biggest-font-size: 2.5rem;
+    --bigger-font-size: 1.5rem;
+    --normal-font-size: 0.938rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/*================================
+  Background & Gradients
+==================================*/
+.custom-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.gradient-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 0;
+}
+
+/* Pizza-Themed Gradient Circles */
+.gradient-circle-1 {
+    /* Representing cheese (yellow) */
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, var(--tomato-red), var(--tomato-red-dark));
+    top: -5%;
+    left: 5%;
+}
+
+.gradient-circle-2 {
+    /* Representing tomato sauce (red) */
+    width: 128px;
+    height: 128px;
+    background: radial-gradient(circle, var(--cheese-yellow), var(--cheese-yellow-alt));
+    top: 85%;
+    left: 80%;
+}
+
+.gradient-circle-3 {
+    /* Representing basil (green) */
+    width: 208px;
+    height: 208px;
+    background: radial-gradient(circle, var(--basil-green), var(--basil-green-dark));
+    top: 20%;
+    left: 80%;
+}
+
+.gradient-circle-4 {
+    /* Another cheese variation (bright melted cheese) */
+    width: 256px;
+    height: 256px;
+    background: radial-gradient(circle, #D7BFA8, #A97142);
+    top: 70%;
+    left: 30%;
+}
+
+/*================================
+  Flex & Container Layout
+==================================*/
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+    height: 67vh;
+}
+
+/*================================
+  Form Container & Content
+==================================*/
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: var(--container-color);
+    backdrop-filter: blur(15px);
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px hsla(353, 100%, 8%, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.logo-container {
+    margin-bottom: 1rem;
+}
+
+.logo {
+    width: 128px;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-family: var(--second-font);
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+    .input-container input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid var(--title-color);
+        background: transparent;
+        padding: 8px 0;
+        font-size: var(--normal-font-size);
+        color: var(--text-color);
+    }
+
+        .input-container input:focus {
+            outline: none;
+            border-bottom: 2px solid var(--first-color);
+        }
+
+    .input-container label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 16px;
+        color: var(--title-color);
+        pointer-events: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .input-container input:focus ~ label,
+    .input-container input:valid ~ label {
+        top: -12px;
+        font-size: 12px;
+    }
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--title-color);
+    margin: 1rem 0;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .submit-button:hover {
+        background-color: var(--first-color-alt);
+        transform: scale(1.02);
+    }
+
+/*================================
+  Image Section
+==================================*/
+.image-container {
+    display: none;
+    flex: 1;
+    z-index: 1;
+}
+
+.image-background {
+    background-image: url('~/img/hr.png'); /* Ensure correct path */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*================================
+  Responsive Media Queries
+==================================*/
+
+/* For small devices */
+@media screen and (max-width: 600px) {
+    .form-container {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 1.75rem;
+    }
+
+    .logo {
+        width: 100px;
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 601px) and (max-width: 1023px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-container {
+        width: 80%;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 1024px) {
+    .container {
+        justify-content: space-between;
+    }
+
+    .form-container {
+        width: 40%;
+    }
+
+    .image-container {
+        display: block;
+        width: 55%;
+    }
+}

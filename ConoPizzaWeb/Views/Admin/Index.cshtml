@@ -1,0 +1,175 @@
+﻿@{
+    ViewData["Title"] = "Admin Home Page";
+}
+
+@section Styles {
+    <style>
+
+        /*=============== GOOGLE FONTS ===============*/
+        @@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:wght@100..900&display=swap");
+
+    .section-1 {
+            width: 100%;
+            height: 25rem;
+            display: flex;
+            justify-content: center;
+            margin-top: 6rem;
+    }
+
+        .dashboard a {
+        width:200px;
+    }
+
+        .dashboard {
+            display: flex;
+            max-width: 650px;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dashboard-item {
+            background: hsl(24, 86%, 94%);
+            border: 2px solid #e3f2fd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+            text-align: center;
+        }
+
+            .dashboard-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+                border-color: hsl(353, 93%, 50%);
+            }
+
+            .dashboard-item i {
+                font-size: 2rem;
+                color: hsl(353, 93%, 50%);
+                margin-bottom: 1rem;
+                background: hsl(24, 86%, 90%);
+                box-shadow: 0 4px 16px hsla(353, 100%, 8%, .1);
+                padding: 1rem;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1rem;
+            }
+
+            .dashboard-item span {
+                display: block;
+                font-size: 1.25rem;
+                color: hsl(353, 48%, 12%);
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                font-family: "Carter One", system-ui;
+            }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: #e3f2fd;
+            color: #1565c0;
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        @@media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .dashboard-item {
+                padding: 1.25rem;
+            }
+
+                .dashboard-item i {
+                    width: 55px;
+                    height: 55px;
+                    font-size: 1.75rem;
+                }
+
+            .section-1 {
+                margin-bottom: 2rem;
+                }
+        }
+
+    @@media (max-width: 631.97px) {
+            .dashboard{
+                justify-content: space-evenly;
+            }
+    }
+
+    @@media (max-width: 541px){
+            .dashboard a {
+                width: 8rem;
+            }
+
+        .dashboard-item span {
+            font-size: 0.75rem;
+        }
+    }
+
+        @@media (max-width: 420px) {
+            .dashboard a {
+                width: 8rem;
+            }
+        }
+    </style>
+}
+
+<div class="body">
+    <section class="section-1">
+        <div class="dashboard">
+                <a href="@Url.Action("OrderDetails", "Admin")" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                        <span>@ViewData["num_users"] Porosit</span>
+                    </div>
+                </a>
+
+            <a href="@Url.Action("AdminMenuDashboard", "Admin")" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                    <i class="fa fa-cutlery" aria-hidden="true"></i>
+                        <span>@ViewData["num_task"] Gjitha Produktet</span>
+                    </div>
+                </a>
+
+            <a href="@Url.Action("Statuset", "Admin", new { status = "Anuluar"})" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                        <i class="fa fa-window-close-o"></i>
+                        <span>@ViewData["overdue_task"] Të Refuzuara</span>
+                    </div>
+                </a>
+
+            <a href="@Url.Action("Statuset", "Admin", new { status = "Vonuara" })" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                        <i class="fa fa-clock-o"></i>
+                    <span>@ViewData["nodeadline_task"] Të Vonuara</span>
+                    </div>
+                </a>
+
+                <a href="@Url.Action("Qarkullimet", "Admin")" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                        <span>@ViewData["todaydue_task"] Qarkullimet</span>
+                    </div>
+                </a>
+
+                <a href="@Url.Action("ManageFeedbacks", "Admin")" style="text-decoration: none; color: inherit;">
+                    <div class="dashboard-item">
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        <span>@ViewData["num_notifications"] Feedbeku</span>
+                    </div>
+                </a>
+        </div>
+    </section>
+</div>

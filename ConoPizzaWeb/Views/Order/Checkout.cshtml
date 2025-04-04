@@ -1,0 +1,225 @@
+﻿@model ConoPizzaWeb.Models.Orders.Order
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+@section Checkout {
+<link rel="stylesheet" href="~/css/Checkout.css" />
+}
+
+<div class="checkout-container">
+    <!-- Left Column -->
+    <div class="checkout-left">
+        <!-- Order Details -->
+        <div class="order-details-card">
+            <h2>Detajet e Porosisë</h2>
+            <div class="detail-item">
+                <span class="detail-label">Emri:</span>
+                <span class="detail-value">@Model.ConsumerName</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Adresa:</span>
+                <span class="detail-value">@Model.Address</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Numri:</span>
+                <span class="detail-value">@Model.PhoneNumber</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Data e Porosisë:</span>
+                <span class="detail-value">@Model.OrderDate.ToLocalTime()</span>
+            </div>
+        </div>
+
+        <!-- Status Timeline -->
+        <div class="status-timeline">
+            <!-- Canceled Status -->
+            <div class="status__anuluar">
+                <div class="X-icon">
+                    <img src="~/img/XButton.png" alt="Canceled" />
+                </div>
+                <span class="step-label" style="display: flex; justify-content: center; align-items: center;">Anuluar</span>
+            </div>
+
+            <!-- Status Steps -->
+            <div class="status-step">
+                <div class="step-icon">
+                    <img src="~/img/ConfirmPC.png" alt="Baking" />
+                    <div class="checked-icon">
+                        <img src="~/img/checked.png" alt="Checked" />
+                    </div>
+                </div>
+                <span class="step-label">Duke Konfirmuar</span>
+                <div class="step-line"></div>
+            </div>
+
+            <div class="status-step">
+                <div class="step-icon">
+                    <img src="~/img/bake.png" alt="Baking" />
+                    <div class="checked-icon">
+                        <img src="~/img/checked.png" alt="Checked" />
+                    </div>
+                </div>
+                <span class="step-label">Duke Përgatitur</span>
+                <div class="step-line"></div>
+            </div>
+
+            <div class="status-step">
+                <div class="step-icon">
+                    <img src="~/img/bike.png" alt="Delivery" />
+                    <div class="checked-icon">
+                        <img src="~/img/checked.png" alt="Checked" />
+                    </div>
+                </div>
+                <span class="step-label">Rrugës</span>
+                <div class="step-line"></div>
+            </div>
+
+            <div class="status-step">
+                <div class="step-icon">
+                    <img src="~/img/delivered.png" alt="Delivered" />
+                    <div class="checked-icon">
+                        <img src="~/img/checked.png" alt="Checked" />
+                    </div>
+                </div>
+                <span class="step-label">Porosia Ka Ardhur</span>
+                <div class="step-line"></div>
+            </div>
+
+            <div class="status-step">
+                <div class="step-icon">
+                    <img src="~/img/paid.png" alt="Paid" />
+                    <div class="checked-icon">
+                        <img src="~/img/checked.png" alt="Checked" />
+                    </div>
+                </div>
+                <span class="step-label">Paguar</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="checkout-right">
+        <div class="order-summary-card">
+            <h3>Përmbledhje e Porosisë</h3>
+            <table class="checkout-table">
+                <thead>
+                    <tr>
+                        <th>Produkti</th>
+                        <th>Ekstra</th>
+                        <th>Sasia</th>
+                        <th>Totali</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.SelectedSize == "Regular")
+                                {
+                                    <div>@item.Product?.Title</div>
+                                }
+                                else
+                                {
+                                    <div> @Html.Raw(item.Product?.Title + "/" + (!string.IsNullOrEmpty(item.SelectedSize) ? item.SelectedSize : "-"))</div>
+                                }
+                            </td>
+                            <td>
+                                @if (item.SelectedExtras.Any())
+                                {
+                                    @string.Join(", ", item.SelectedExtras.Select(e => e.ExtraName))
+                                }
+                                else
+                                {
+                                    @("-")
+                                }
+                            </td>
+                            <td>@item.Quantity</td>
+                            <td>@(item.UnitPrice * item.Quantity)€</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="total-label">Totali:</td>
+                        <td class="total-amount">@Model.Total.ToString("0.00")€</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+         // Keep track of the last known status to detect changes
+        let lastKnownStatus = null;
+
+         function updateStatusVisual(status) {
+            const anuluarDiv = document.querySelector('.status__anuluar');
+            const statusSteps = document.querySelectorAll('.status-step');
+
+            // Hide all steps initially
+            statusSteps.forEach(step => step.style.display = 'none');
+            anuluarDiv.style.display = 'none';
+
+            // Define the order of statuses
+            const statusOrder = ['Konfirmo', 'NPërgaditje', 'Rruges', 'Arritur', 'Paguar'];
+            const currentStepIndex = statusOrder.indexOf(status);
+
+            // Handle Anuluar status
+            if (status === 'Anuluar') {
+                anuluarDiv.style.display = 'grid';
+                anuluarDiv.classList.add('active');
+                return;
+            }
+
+            // Show and update steps based on the current status
+            statusSteps.forEach((step, index) => {
+                step.style.display = 'flex'; // Ensure the step is visible
+                step.classList.remove('done', 'inProgress', 'undone');
+
+                if (index < currentStepIndex) {
+                    // Completed steps
+                    step.classList.add('done');
+                } else if (index === currentStepIndex) {
+                    // Current in-progress step
+                    step.classList.add('inProgress');
+                } else {
+                    // Upcoming steps
+                    step.classList.add('undone');
+                }
+            });
+        }
+
+        // Fetch the latest order status
+        async function fetchOrderStatus() {
+            const orderId = @Model.OrderId;
+            try {
+                const response = await fetch(`/Order/GetOrderStatus?orderId=${orderId}`);
+                const data = await response.json();
+                if (data.status) {
+                     if (data.status !== lastKnownStatus) {
+                        if (data.status === 'Anuluar') {
+                            // Show error alert when canceled
+                            showAlert('Porosia juaj u anulua!', 'error');
+                        } else {
+                            // Show success alert for any other status change
+                            showAlert(`Statusi i porosisë u ndryshua në: ${data.status}`, 'success');
+                        }
+                        lastKnownStatus = data.status;
+                    }
+                    updateStatusVisual(data.status);
+                }
+            } catch (error) {
+                console.error('Error fetching status:', error);
+            }
+        }
+
+        // Poll every 5 seconds and update status
+        setInterval(fetchOrderStatus, 5000);
+        fetchOrderStatus(); // Initial check
+    </script>
+}

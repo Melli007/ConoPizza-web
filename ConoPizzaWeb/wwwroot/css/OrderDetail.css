@@ -1,0 +1,355 @@
+﻿
+:root {
+    --primary: #6366f1;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+}
+
+.order__h1 {
+    display: flex;
+    justify-content: center;
+    margin: 7rem 0 2rem 0;
+}
+
+.order-card {
+    background: var(--card-bg);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.order-header {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) minmax(120px, 1.5fr) 150px 120px 140px auto;
+    position: relative;
+    gap: 1rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    align-items: center;
+}
+
+    .order-header:hover {
+        background: #f1f5f9;
+    }
+
+.order-details {
+    padding: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.badge-konfirmo {
+    background: #fef3c7; /* pale yellow */
+    color: #d97706; /* dark amber */
+}
+
+.badge-npërgaditje {
+    background: #dbeafe; /* pale blue */
+    color: #1d4ed8; /* darker blue */
+}
+
+.badge-rruges {
+    background: #fef9c3; /* pale gold */
+    color: #ca8a04; /* dark gold */
+}
+
+.badge-arritur {
+    background: #dcfce7; /* pale green */
+    color: #15803d; /* dark green */
+}
+
+.badge-paguar {
+    background: #cffafe; /* pale teal */
+    color: #0891b2; /* teal text */
+}
+
+.badge-Anuluar {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.product-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.product-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.select-status {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #e2e8f0;
+    background: white;
+    font-size: 0.875rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+    .btn-danger:hover {
+        background: #dc2626;
+    }
+
+.toggle-icon {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    color: #64748b;
+}
+
+.fa-angle-down {
+    transition: transform 0.3s ease;
+    font-size: 1.25rem;
+}
+
+.toggle-icon.active .fa-angle-down {
+    transform: rotate(180deg);
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.font-medium {
+    font-weight: 550;
+}
+
+.text-gray-500 {
+    color: #6B7280;
+}
+
+.filter-container {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.date-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.status-filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+label {
+    font-weight: 500;
+    color: hsl(353, 48%, 12%);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+input[type="date"], select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    width: 100%;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: end;
+}
+
+.btn-primary {
+    background-color: white;
+    color: hsl(353, 48%, 12%);
+    margin: 0px 5px;
+    font-style: normal;
+    font-size: var(--normal-font-size);
+    border: 1px solid var(--first-color-alt);
+}
+
+    .btn-primary:hover {
+        color: white;
+        background-color: var(--first-color-alt);
+    }
+
+/* Filter Dropdown Styles */
+.filter-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.marginB {
+    margin-bottom: 4rem;
+}
+
+.filter-dropdown {
+    position: relative;
+    margin-top: 3rem;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    z-index: 10;
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+    .filter-dropdown.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+.filter-toggle-btn {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-left: auto;
+}
+
+.close-filter-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .order-header {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+        .order-header > div:nth-child(5),
+        .order-header > div:nth-child(6) {
+            grid-column: span 2;
+        }
+
+    .toggle-icon {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .filter-dropdown {
+        padding: 1rem;
+    }
+
+    .date-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .status-filter {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .filter-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+        .filter-actions .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+    .close-filter-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-header {
+        grid-template-columns: 1fr;
+    }
+
+        .order-header > div {
+            grid-column: span 2 !important;
+        }
+
+    .toggle-icon {
+        position: static;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    input[type="date"], select {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .filter-dropdown {
+        padding: 0.75rem;
+    }
+
+    .filter-toggle-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

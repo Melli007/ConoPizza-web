@@ -1,0 +1,105 @@
+﻿/*=============== ALERTS ===============*/
+/* Alert container */
+.alert-container {
+    position: fixed !important;
+    top: 5rem !important;
+    right: 3rem !important;
+    z-index: 10000 !important;
+    max-width: 350px !important;
+}
+
+/* Base alert styling */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    margin-bottom: 1rem;
+    min-width: 280px;
+    border: 1px solid transparent;
+}
+
+/* ===== Success Alert ===== */
+.alert-success {
+    border-color: #34d399; /* border-green-400 */
+    background-color: #f0fdf4; /* bg-green-50 (ish) */
+}
+
+    .alert-success .alert-title,
+    .alert-success .alert-message {
+        color: #065f46; /* text-green-700 */
+    }
+
+/* ===== Error Alert ===== */
+.alert-error {
+    border-color: #f87171; /* border-red-400 */
+    background-color: #fef2f2; /* bg-red-50 (ish) */
+}
+
+    .alert-error .alert-title,
+    .alert-error .alert-message {
+        color: #b91c1c; /* text-red-700 */
+    }
+
+/* Icon container: small circle */
+.alert-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #34d399; /* default for success */
+    color: #fff; /* white icon */
+}
+
+.alert-error .alert-icon {
+    background-color: #f87171; /* red background for error */
+}
+
+/* Icon styling */
+.alert-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor; /* ensures the icon color is #fff or #fff for error */
+    stroke-width: 1.5;
+}
+
+/* Content styling */
+.alert-content {
+    flex: 1;
+}
+
+.alert-title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.alert-message {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Close button */
+.alert-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #9ca3af; /* text-gray-500 */
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+    .alert-close:hover {
+        color: #4b5563; /* text-gray-600 */
+    }

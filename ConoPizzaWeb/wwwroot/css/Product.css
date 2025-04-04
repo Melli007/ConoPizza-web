@@ -1,0 +1,270 @@
+﻿
+body, html {
+    overflow-x: hidden !important;
+}
+
+.Pcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px);
+    padding-top: 2rem;
+    margin-top: 4rem;
+}
+
+/* Ensure elements are visible for animations */
+.Pcontainer,
+.left,
+.right {
+    opacity: 1 !important; /* Override any accidental hiding */
+    visibility: visible !important;
+}
+
+/* Ensure product section doesn't cause horizontal scrolling */
+#product {
+    overflow: hidden;
+    width: 100%;
+    min-width:100vw;
+}
+
+
+/* Left side: the image container */
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right side: text & selections */
+.right {
+  flex: 1;
+  padding: 2rem;
+  /* maybe a subtle card style? */
+  border-radius: 0.5rem;
+  margin: 1rem;
+  margin-right: 3rem;
+  background: hsl(24, 86%, 90%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.imgContainer {
+  width: 80%;
+  height: 80%;
+  position: relative;
+}
+
+/* Title & price */
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+  font-weight: 700;
+}
+
+.price {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #d1411e;
+  margin-bottom: 1rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #d1411e;
+}
+
+.desc {
+  margin-bottom: 1.5rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Headings for size/ingredients */
+.choose {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem 0;
+  color: #111;
+  font-weight: 600;
+}
+
+.sizes {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Each size item */
+.size {
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s;
+}
+.size:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+.size:nth-child(1) { /* small */
+  width: 30px;
+  height: 30px;
+}
+.size:nth-child(2) { /* medium */
+  width: 40px;
+  height: 40px;
+}
+.size:nth-child(3) { /* large */
+  width: 50px;
+  height: 50px;
+}
+
+/* Size label bubble */
+.number {
+  position: absolute;
+  top: -5px;
+  right: -20px;
+  background-color: teal;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Single ingredient option */
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The quantity input */
+.quantity {
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.quantity-selector {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #FF6B6B;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .quantity-btn:hover {
+        background: #FF5252;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+    }
+
+    .quantity-btn:active {
+        transform: scale(0.95);
+    }
+
+.quantity-input {
+    width: 32px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    color: #2d2d2d;
+    background: transparent;
+    -moz-appearance: textfield;
+}
+
+    .quantity-input::-webkit-outer-spin-button,
+    .quantity-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+.quantity-btn[disabled] {
+    background: #e0e0e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+    .quantity-btn[disabled]:hover {
+        transform: none;
+        background: #e0e0e0;
+    }
+
+@media screen and (max-width: 480px) {
+  .Pcontainer {
+    flex-direction: column;
+    padding: 1rem;
+    min-height: auto;
+  }
+  .left,
+  .right {
+    width: 100%;
+    margin: 0;
+  }
+  .imgContainer {
+    width: 90vw;
+    height: 90vw;
+    margin-bottom: 1.5rem;
+  }
+  .title {
+    font-size: 1.6rem;
+  }
+  .price {
+    font-size: 1.2rem;
+  }
+  .desc {
+    font-size: 0.95rem;
+  }
+  .sizes {
+    justify-content: center;
+  }
+  .ingredients {
+    flex-direction: column;
+  }
+  .add {
+    gap: 0.5rem;
+  }
+  .quantity {
+    width: 100px;
+    height: 40px;
+  }
+}

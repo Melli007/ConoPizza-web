@@ -1,0 +1,499 @@
+﻿@using ConoPizzaWeb.Models.ViewModels
+@using ConoPizzaWeb.Models.Products
+@using ConoPizzaWeb.Models.Ingredients
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model AdminMenuDashboardViewModel
+
+@section AdminMenu {
+    <!-- Bootstrap CSS (if not already in your layout) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+
+
+    <style>
+        /* Example custom styles */
+        .table-action {
+            font-size: 0.875rem;
+            margin: 0 0.25rem;
+            color: #adb5bd;
+        }
+
+            .table-action:hover {
+                color: #919ca6;
+            }
+
+        .table-action-delete:hover {
+            color: #f5365c;
+        }
+
+        .button-container form,
+        .button-container form div {
+            display: inline;
+        }
+
+        .c__red {
+            color: hsl(353, 93%, 50%) !important;
+        }
+
+        .btn-neutral {
+            background-color: white;
+            color: hsl(353, 48%, 12%);
+            margin: 0px 5px;
+            font-style:normal;
+            font-size: var(--normal-font-size);
+        }
+
+            .btn-neutral:hover {
+                background-color: hsl(353, 93%, 50%) !important;
+                color: hsl(24, 86%, 88%);
+            }
+
+            .item{
+                margin-right:3rem;
+            }
+
+            .fa-pencil-square-o:hover{
+                color:var(--first-color);
+            }
+
+        .fa-chevron-circle-down:hover{
+            color: hsl(353, 93%, 50%) !important;
+        }
+
+        .active > .page-link, .page-link.active {
+            background-color: var(--first-color)!important;
+            color: var(--body-color) !important;
+            border-color: tomato !important;
+        }
+        .page-link {
+            color: hsl(353, 48%, 12%) !important;
+        }
+    </style>
+    <!-- Optionally include Bootstrap JS if not in your layout -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+}
+
+<div class="container-fluid mt-4">
+    <!-- Alert Message, e.g. from TempData -->
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="alert-text">@TempData["success"]</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <!-- Bootstrap 5 close button -->
+            </button>
+        </div>
+    }
+
+    <!-- Header Row -->
+    <div class="row mb-3 ">
+        <div class="col d-flex justify-content-end align-items-center mt-5 pt-5">
+            <div>
+                <!-- "New" Button remains as is -->
+                <button type="button"
+                        class="btn btn-sm btn-neutral"
+                        data-bs-toggle="modal"
+                        data-bs-target="#createOptionsModal">
+                    New
+                </button>
+                <!-- Filters button toggles the collapse dropdown -->
+                <button type="button"
+                        class="btn btn-sm btn-neutral"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#filterOptions"
+                        aria-expanded="false"
+                        aria-controls="filterOptions">
+                    Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collapse dropdown for filters -->
+    <div class="collapse mb-3" id="filterOptions">
+        <div class="card card-body">
+            <form method="get" action="@Url.Action("AdminMenuDashboard")">
+                <div class="row g-3">
+                    <!-- Category filter -->
+                    <div class="col-md-4">
+                        <label for="filterCategoryId" class="form-label">Category</label>
+                        <select name="filterCategoryId" id="filterCategoryId" class="form-select">
+                            <option value="">All Categories</option>
+                            @foreach (var cat in (List<ConoPizzaWeb.Models.Categories.Category>)ViewBag.Categories)
+                            {
+                                <option value="@cat.CategoryId">@cat.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <!-- Featured filter -->
+                    <div class="col-md-4">
+                        <label for="filterIsFeatured" class="form-label">Featured</label>
+                        <select name="filterIsFeatured" id="filterIsFeatured" class="form-select">
+                            <option value="">All</option>
+                            <option value="true">Featured</option>
+                            <option value="false">Not Featured</option>
+                        </select>
+                    </div>
+                    <!-- Search filter -->
+                    <div class="col-md-4">
+                        <label for="searchTerm" class="form-label">Search</label>
+                        <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Search by title" />
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col text-end">
+                        <button type="submit" class="btn btn-neutral" style="border-color:hsl(353, 93%, 50%);">Apply Filters</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL START -->
+    <div class="modal fade" id="createOptionsModal" tabindex="-1" aria-labelledby="createOptionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createOptionsModalLabel">Create an Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p>Select which type of item you’d like to create:</p>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <!-- Two links: one for Product, one for Ingredient -->
+                    <a asp-action="CreateProduct"
+                       class="btn btn-secondary btn-neutral">
+                        Create Product
+                    </a>
+
+                    <a asp-action="CreateIngredient"
+                       class="btn btn-secondary btn-neutral">
+                        Create Ingredient
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- MODAL END -->
+
+    <!-- Two-column layout: Products on the left, Ingredients on the right. -->
+    <div class="row g-4">
+        <!-- Products Column -->
+        <div class="col-xl-7 col-lg-12">
+            <div class="card shadow">
+                <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">ConoPizza's Menu</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped align-items-center table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="c__red">Item</th>
+                                <th scope="col" class="c__red">Description</th>
+                                <th scope="col" class="c__red">Price</th>
+                                <th scope="col" class="c__red">Category</th>
+                                <th scope="col" class="c__red text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Products)
+                            {
+                                // For short description:
+                                var truncatedDesc = product.Description.Length > 40
+                                ? product.Description.Substring(0, 40) + "..."
+                                : product.Description;
+
+                                // For a "first price" display in the main row (if you want):
+                                var firstPrice = product.Prices?.FirstOrDefault()?.Price ?? 0M;
+
+                                <tr>
+                                    <!-- Basic Product Info Row -->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                            {
+                                                <img alt="Image"
+                                                     src="@product.ImageUrl"
+                                                     style="width:40px;height:40px;object-fit:cover;margin-right:8px;" />
+                                            }
+                                            <span>@product.Title</span>
+                                        </div>
+                                    </td>
+                                    <td>@truncatedDesc</td>
+                                    <td>$ @firstPrice</td>
+                                    <td>@(product.Category?.Name ?? "None")</td>
+                                    <td class="text-center" style="width:6rem;">
+                                        <!-- Expand/Collapse Link -->
+                                        <a class="btn btn-sm btn-light"
+                                           data-bs-toggle="collapse"
+                                           href="#collapseRow-@product.ProductId"
+                                           role="button"
+                                           aria-expanded="false"
+                                           aria-controls="collapseRow-@product.ProductId">
+                                            <i class="fa fa-chevron-circle-down" style="color:#adb5bd;" aria-hidden="true"></i>
+                                        </a>
+
+                                        <!-- Existing Edit/Delete actions -->
+                                        <div class="button-container" style="display:inline-block;">
+                                            <a asp-action="EditProduct"
+                                               asp-route-id="@product.ProductId"
+                                               class="table-action me-1"
+                                               data-bs-toggle="tooltip"
+                                               title="Edit menu item">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+
+                                            <form asp-action="DeleteProduct"
+                                                  asp-route-id="@product.ProductId"
+                                                  method="post"
+                                                  style="display:inline;"
+                                                  onsubmit="return confirm('Are you sure to delete this item?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit"
+                                                        class="table-action table-action-delete"
+                                                        data-toggle="tooltip"
+                                                        title="Delete menu item">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Collapsible Detail Row -->
+                                <tr class="collapse" id="collapseRow-@product.ProductId">
+                                    <td colspan="5" style="background-color:#f9f9f9;">
+                                        <!-- This section is shown only when the row is expanded -->
+                                        <div class="p-3">
+                                            <!-- Show ALL prices -->
+                                            <strong>Prices:</strong>
+                                            @if (product.Prices != null && product.Prices.Any())
+                                            {
+                                                <ul>
+                                                    @foreach (var price in product.Prices)
+                                                    {
+                                                        <li>@price.Size: $ @price.Price</li>
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <p>No prices found.</p>
+                                            }
+
+                                            <!-- Show Extras -->
+                                            <strong>Extras:</strong>
+                                            @if (product.ExtraOptions != null && product.ExtraOptions.Any())
+                                            {
+                                                <ul>
+                                                    @foreach (var extra in product.ExtraOptions)
+                                                    {
+                                                        <li>@extra.Name: $ @extra.Price</li>
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <p>No extras found.</p>
+                                            }
+
+                                            <!-- Show Ingredients -->
+                                            <strong>Ingredients:</strong>
+                                            @if (product.Ingredients != null && product.Ingredients.Any())
+                                            {
+                                                <ul>
+                                                    @foreach (var pi in product.Ingredients)
+                                                    {
+                                                        <li>@pi.Ingredient.Name</li>
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <p>No ingredients found.</p>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pager for Products -->
+                @if (Model.Products?.TotalItemCount > 0)
+                {
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <!-- LEFT side: custom text -->
+                            <div class="col-sm-6 text-muted">
+                                <!-- For example, show item slice -->
+                                Duke shfaqur produktin @Model.Products.FirstItemOnPage
+                                deri në  @Model.Products.LastItemOnPage
+                                nga gjithsej @Model.Products.TotalItemCount
+                            </div>
+
+                            <!-- RIGHT side: numeric page links -->
+                            <div class="col-sm-6 d-flex justify-content-end">
+                                @Html.PagedListPager(
+                                         Model.Products,
+                                         page => Url.Action("AdminMenuDashboard", new { page, pageIng = 1 }),
+                                         new PagedListRenderOptions
+                            {
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                MaximumPageNumbersToDisplay = 5,
+                                UlElementClasses = new[] { "pagination", "justify-content-center" },
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" },
+                                LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+                                LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>"
+                            }
+                                         )
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-footer text-muted">
+                        <em>No items found.</em>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+        <!-- Ingredients Column -->
+        <div class="col-xl-5 col-lg-12">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h4 class="mb-0">Ingredients</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped align-items-center table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="c__red">Ingredient</th>
+                                <th scope="col" class="c__red">Description</th>
+                                <!-- Add columns if needed (e.g. Price) -->
+                                <th scope="col" class="c__red text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ingredient in Model.Ingredients)
+                            {
+                                var shortDesc = !string.IsNullOrEmpty(ingredient.Description) && ingredient.Description.Length > 40
+                                ? ingredient.Description.Substring(0, 40) + "..."
+                                : ingredient.Description;
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @if (!string.IsNullOrEmpty(ingredient.InImgUrl))
+                                            {
+                                                <img alt="Image"
+                                                     src="@ingredient.InImgUrl"
+                                                     style="width:40px;height:40px;object-fit:cover;margin-right:8px;" />
+                                            }
+                                            <span>@ingredient.Name</span>
+                                        </div>
+                                    </td>
+                                  
+                                    <td>@(shortDesc ?? "N/A")</td>
+                                    <td class="text-center">
+                                        <!-- Example actions:
+                                             If you have an EditIngredient or DeleteIngredient action, you'd link them here.
+                                        -->
+                                        <a asp-action="EditIngredient"
+                                           asp-route-id="@ingredient.IngredientId"
+                                           class="table-action me-1"
+                                           data-toggle="tooltip"
+                                           title="Edit ingredient">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+
+                                        <form asp-action="DeleteIngredient"
+                                              asp-route-id="@ingredient.IngredientId"
+                                              method="post"
+                                              style="display:inline;"
+                                              onsubmit="return confirm('Are you sure to delete this ingredient?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit"
+                                                    class="table-action table-action-delete"
+                                                    data-toggle="tooltip"
+                                                    title="Delete ingredient">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Ingredient Pager -->
+                @if (Model.Ingredients?.TotalItemCount > 0)
+                {
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <!-- LEFT side: custom text -->
+                            <div class="col-sm-6 text-muted">
+                                <!-- For example, show item slice -->
+                                Duke shfaqur produktin @Model.Ingredients.FirstItemOnPage
+                                deri në  @Model.Ingredients.LastItemOnPage
+                                nga gjithsej @Model.Ingredients.TotalItemCount
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-end">
+                                @Html.PagedListPager(
+                                         Model.Ingredients,
+                                         page => Url.Action("AdminMenuDashboard", new { pageProd = Model.Products.PageNumber, pageIng = page }),
+                                         new PagedListRenderOptions
+                            {
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                MaximumPageNumbersToDisplay = 5,
+                                UlElementClasses = new[] { "pagination", "justify-content-center" },
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" },
+                                LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+                                LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>"
+                            }
+                                         )
+
+                        </div>
+                    </div>
+                 </div>
+                }
+                else
+                {
+                    <div class="card-footer text-muted">
+                        <em>No ingredients found.</em>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

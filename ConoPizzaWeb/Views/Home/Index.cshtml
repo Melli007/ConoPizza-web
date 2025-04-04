@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!--==================== MAIN ====================-->
+<main class="main">
+    <!--==================== HOME ====================-->
+    <section class="home section" id="home">
+        <div class="home__container container grid">
+            <div class="home__data">
+                <h1 class="home__title">Pica Krispy<br> Të Shijshme</h1>
+
+                <p class="home_description">
+                    Porositni picat më të mira për të ndalur urinë tuaj
+                    dhe për të krijuar momente të paharrueshme me familjen.
+                    Porosit tani!
+                </p>
+
+                <a href="@Url.Action("index","Menu")#products" class="button">Porosit Picën Tani</a>
+
+                <img src="~/img/sticker-pizza.svg" alt="image" class="home__sticker-1">
+                <img src="~/img/sticker-leaf.svg" alt="image" class="home__sticker-2">
+            </div>
+
+            <div class="home__images">
+                <img src="~/img/home-pizza.png" alt="image" class="home__pizza">
+                <img src="~/img/home-board.png" alt="image" class="home__board">
+
+                <img src="~/img/home-leaf-1.png" alt="image" class="home__ingredient home__leaf-1">
+                <img src="~/img/home-leaf-2.png" alt="image" class="home__ingredient home__leaf-2">
+                <img src="~/img/home-pepperoni.png" alt="image" class="home__ingredient home__pepperoni">
+                <img src="~/img/home-mushroom.png" alt="image" class="home__ingredient home__mushroom">
+                <img src="~/img/home-olive.png" alt="image" class="home__ingredient home__olive">
+                <img src="~/img/home-tomato.png" alt="image" class="home__ingredient home__tomato">
+            </div>
+        </div>
+    </section>
+
+    <!--==================== ABOUT ====================-->
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title">Mëso Më Shumë Për <br> Historinë Tonë</h2>
+
+                <p class="about__description">
+                    Sekreti i suksesit është përbërësit më të mirë
+                    për të bërë picën më të mirë. Përzierim traditën me inovacion
+                    dhe kërkojmë përsosmërinë, që nga hapja e parë e picerisë sonë.
+                </p>
+
+                <a href="#popular" class="button">Picat Më Të Mira</a>
+
+                <img src="~/img/sticker-cheese.svg" alt="image" class="about__sticker">
+            </div>
+
+            <img src="~/img/about-img.png" alt="image" class="about__img">
+        </div>
+    </section>
+
+    <!--==================== POPULAR ====================-->
+    <section class="popular section" id="popular">
+        <div class="popular__container container grid">
+            <div class="popular__data">
+                <h2 class="section__title">Zbuloni <br> Porosit E Famshme </h2>
+
+                <p class="popular__description">
+                    Zgjidhni shijet më të mira të përgatitura dhe të shijshme. Ne kemi mbledhur disa receta të njohura nga e gjithë bota që ju të zgjidhni të preferuarën tuaj.
+                </p>
+            </div>
+
+            <div class="popular__swiper swiper">
+                <img src="~/img/popular-dish.png" alt="image" class="popular__dish">
+                <div class="swiper-wrapper">
+                    @foreach (var product in Model)
+                    {
+                        <article class="popular__card swiper-slide">
+                            <a href="@Url.Action("Index", "Product", new { id = product.ProductId })">
+                            <img src="@product.ImageUrl" alt="image" class="popular__img">
+                            </a>
+                                <h3 class="popular__title">@product.Title</h3>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   

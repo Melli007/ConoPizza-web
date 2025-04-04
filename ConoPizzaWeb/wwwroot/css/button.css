@@ -1,0 +1,107 @@
+﻿.btn {
+    width: 10em;
+    height: 3em;
+    background-color: var(--first-color);
+    border: none;
+    border-radius: 3em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.2s ease;
+    position: relative;
+    display: inline;
+    overflow: hidden;
+}
+
+
+    .btn:hover {
+        /* Slightly reduce brightness (10%) */
+        filter: brightness(0.9);
+        /* Optional: slightly scale up */
+        transform: scale(1.05);
+    }
+
+
+    .btn:active {
+        transform: scale(0.9);
+    }
+
+.btn__text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.btn__text__second {
+    opacity: 0;
+    left: 30%;
+}
+
+.btn__icon {
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    bottom: 8%;
+}
+
+.btn__icon__cart {
+    left: -20%;
+}
+
+.btn__icon__box {
+    top: -60%;
+    left: 45%;
+}
+
+.btn_active .btn__text__first {
+    animation: text1 0.3s forwards;
+}
+
+.btn_active .btn__text__second {
+    animation: text2 2.3s forwards;
+}
+
+.btn_active .btn__icon__cart {
+    animation: cart 2.5s forwards;
+}
+
+.btn_active .btn__icon__box {
+    animation: box 1.5s forwards;
+}
+
+@keyframes text1 {
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes text2 {
+    90% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes cart {
+    30%, 60% {
+        left: 40%;
+    }
+
+    100% {
+        left: 110%;
+    }
+}
+
+@keyframes box {
+    80% {
+        color: white; /* Update this color to match your design */
+    }
+
+    90%, 100% {
+        top: 2%;
+        color: transparent;
+    }
+}

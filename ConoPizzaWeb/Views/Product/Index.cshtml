@@ -1,0 +1,237 @@
+﻿@model ConoPizzaWeb.Models.Products.Product
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+
+
+
+@{
+    ViewData["Title"] = "Product";
+    // Pre-filled values for editing (if available)
+    Guid? editItemId = ViewBag.EditItemId as Guid?;
+    int editQuantity = ViewBag.EditQuantity != null ? (int)ViewBag.EditQuantity : 1;
+    int editSizeIndex = ViewBag.EditSizeIndex != null ? (int)ViewBag.EditSizeIndex : 0;
+    var editExtras = ViewBag.EditExtras as List<ConoPizzaWeb.Models.Cart.CartItemExtra> ?? new();
+}
+
+<!-- Link your custom CSS (copy your "Product.module.css" into "wwwroot/css/Product.css") -->
+<link rel="stylesheet" href="~/css/Product.css" />
+<link rel="stylesheet" href="~/css/button.css" />
+
+<section id="product">
+    <div class="Pcontainer" style="margin-bottom: 4rem;">
+        <div class="left">
+            <div class="imgContainer">
+                <img src="@Model.ImageUrl" alt="Pizza" style="object-fit:contain; width:90%; height:90%;" />
+            </div>
+        </div>
+
+        <div class="right">
+            <h1 class="title">@Model.Title</h1>
+            <span class="price" id="pricePlaceholder">$0.00</span>
+            <p class="desc">@Model.Description</p>
+
+            @if (Model.CategoryId == 1)
+            {
+                <h3 class="choose">Zgjidhni madhësinë</h3>
+                <div class="sizes">
+                    <div class="size" onclick="selectSize(0)">
+                        <img src="~/img/size.png" alt="Small" style="width:100%; height:100%;" />
+                        <span class="number">Vogël</span>
+                    </div>
+                    <div class="size" onclick="selectSize(1)">
+                        <img src="~/img/size.png" alt="Medium" style="width:100%; height:100%;" />
+                        <span class="number">Mesme</span>
+                    </div>
+                    <div class="size" onclick="selectSize(2)">
+                        <img src="~/img/size.png" alt="Large" style="width:100%; height:100%;" />
+                        <span class="number">Madhe</span>
+                    </div>
+                </div>
+            }
+
+            @if (Model.ExtraOptions != null && Model.ExtraOptions.Any())
+            {
+                <h3 class="choose">Zgjidhni përbërës shtesë</h3>
+                <div class="ingredients">
+                    @foreach (var extra in Model.ExtraOptions)
+                    {
+                        <div class="option">
+                            <input type="checkbox" id="extra_@extra.ProductExtraId" class="checkbox extra-option"
+                                   data-extra-price="@extra.Price" onchange="updatePrice()" />
+                            <label for="extra_@extra.ProductExtraId">
+                                @extra.Name - $@extra.Price
+                            </label>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="add">
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="updateQuantity(-1)" aria-label="Decrease quantity">
+                        −
+                    </button>
+                    <input type="number" class="quantity-input" value="1" min="1" max="99" id="quantityInput" readonly>
+                    <button class="quantity-btn" onclick="updateQuantity(1)" aria-label="Increase quantity">
+                        +
+                    </button>
+                </div>
+
+                <button class="btn btn__text" onclick="addToCart()">Shtoni</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==================== RECIPE ====================-->
+<section class="recipe section">
+    <h2 class="section__title">Përbërës Të Freskët Dhe <br> Natyral Të: "@Model.Title" </h2>
+
+    <div class="recipe__container container grid">
+        <div class="recipe__list grid">
+
+            @if (Model.Ingredients != null && Model.Ingredients.Any())
+            {
+                foreach (var pi in Model.Ingredients)
+                {
+                    <div class="recipe__ingredient">
+                        <img src="@pi.Ingredient.InImgUrl" alt="@pi.Ingredient.Name" class="recipe__image" />
+                        <div>
+                            <h3 class="recipe__name">@pi.Ingredient.Name</h3>
+                            <p class="recipe__description">@pi.Ingredient.Description</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No ingredients available for this product.</p>
+            }
+        </div>
+
+        @if (Model.CategoryId == 1)
+        {
+            <!-- Show pizza background image -->
+            <img src="~/img/recipe-img.png" alt="Pizza ingredients" class="recipe__img" />
+        }
+        else if (Model.CategoryId == 2)
+
+        {
+            <!-- Show burger background image -->
+            <img src="~/img/burger-ingredients.png" alt="Burger ingredients" class="recipe__img" />
+        }
+        else if (Model.CategoryId == 3)
+        {
+            <!-- Show burger background image -->
+            <img src="~/img/sandwich-ingredients.png" alt="Burger ingredients" class="recipe__img" />
+        }
+    </div>
+</section>
+
+
+@section Scripts {
+    <script>
+        let editItemId = '@(editItemId.HasValue ? editItemId.ToString() : "")';
+        let editQuantity = @editQuantity;
+        let editSizeIndex = @editSizeIndex;
+        let editExtraNames = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(editExtras.Select(e => e.ExtraName)));
+
+        let pizzaPrices = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Prices.Select(p => p.Price)));
+        let currentSize = 0;
+
+        function selectSize(sizeIndex) {
+            currentSize = sizeIndex;
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const priceElement = document.getElementById("pricePlaceholder");
+            let basePrice = (pizzaPrices && pizzaPrices.length > 0) ? pizzaPrices[currentSize] : 0;
+            let extrasTotal = 0;
+            document.querySelectorAll('.extra-option').forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    extrasTotal += parseFloat(checkbox.getAttribute('data-extra-price'));
+                }
+            });
+            const totalPrice = (basePrice + extrasTotal);
+            priceElement.textContent = "$" + totalPrice.toFixed(2);
+        }
+
+        const quantityInput = document.querySelector('.quantity-input');
+
+        function updateQuantity(change) {
+            let currentValue = parseInt(quantityInput.value);
+            let newValue = Math.max(1, Math.min(99, currentValue + change));
+
+            quantityInput.value = newValue;
+
+            // Add bounce animation
+            if(change > 0) {
+                quantityInput.animate([
+                    { transform: 'scale(1)', opacity: 1 },
+                    { transform: 'scale(1.2)', opacity: 0.8 },
+                    { transform: 'scale(1)', opacity: 1 }
+                ], { duration: 300 });
+            }
+        }
+
+          window.addEventListener('load', () => {
+            // Pre-fill if editing
+            document.getElementById("quantityInput").value = editQuantity;
+            selectSize(editSizeIndex);
+            document.querySelectorAll('.extra-option').forEach(function(checkbox) {
+                let labelText = checkbox.nextElementSibling?.innerText ?? "";
+                let nameOnly = labelText.split('-')[0].trim();
+                if (editExtraNames.includes(nameOnly)) {
+                    checkbox.checked = true;
+                }
+            });
+            updatePrice();
+        });
+
+        function addToCart() {
+            const quantity = parseInt(document.getElementById("quantityInput").value) || 1;
+
+            const extras = [];
+            document.querySelectorAll('.extra-option').forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    let extraPrice = parseFloat(checkbox.getAttribute('data-extra-price'));
+                    let extraName = checkbox.nextElementSibling?.innerText.split('-')[0].trim() ?? "";
+                    extras.push({ name: extraName, price: extraPrice });
+                }
+            });
+
+            // Include editItemId so the server knows we're editing
+            const bodyData = {
+            // If editItemId is an empty string, turn it into null
+            editItemId: editItemId ? editItemId : null,
+            productId: @(Model.ProductId),
+            quantity: quantity,
+            sizeIndex: currentSize,
+            extras: extras
+        };
+
+
+        fetch('/Product/AddToCart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': '@Antiforgery.GetAndStoreTokens(ViewContext.HttpContext).RequestToken'
+          },
+          body: JSON.stringify(bodyData)
+        })
+            .then(r => r.json())
+                    .then(data => {
+          if (data.success) {
+            document.querySelector('.counter').textContent = data.totalUniqueItems;
+            showAlert("Produkti u shtua me sukses në shportë!", "success");
+          } else {
+                    showAlert("Shtimi i artikullit në shportë dështoi!", "error");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          showAlert("Ndodhi një gabim gjatë shtimit në karrocë!", "error");
+        });
+        }
+    </script>
+}

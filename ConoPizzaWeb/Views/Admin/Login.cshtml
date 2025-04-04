@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+    Layout = null; // Using a standalone layout for the login page
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+</head>
+<body>
+
+        <div class="gradient-circle gradient-circle-1"></div>
+        <div class="gradient-circle gradient-circle-2"></div>
+        <div class="gradient-circle gradient-circle-3"></div>
+        <div class="gradient-circle gradient-circle-4"></div>
+
+        <div class="flex-center">
+            <div class="container">
+                <div class="form-container">
+                    <div class="logo-container">
+                        <img src="~/img/Untitled design (9).png" class="logo" alt="Logo" />
+                    </div>
+                    <div class="form-content">
+                        <h1 class="form-title">LOGIN</h1>
+
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <p class="error-message">Invalid username or password.</p>
+                        }
+
+                        <form class="form" asp-action="Login" method="post">
+                            <div class="input-container">
+                                <input type="text" name="username" required />
+                                <label>Username</label>
+                            </div>
+                            <div class="input-container">
+                                <input type="password" name="password" required />
+                                <label>Password</label>
+                            </div>
+                            <button type="submit" class="submit-button">Login</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <div class="image-background"></div>
+                </div>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var uniqueSessionId = '@ViewData["UniqueSessionId"]';
+            if (uniqueSessionId) {
+                sessionStorage.setItem("UniqueSessionId", uniqueSessionId);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+
+    @section TailwindScripts {
+        <!--=====Tailwind configuration with safelist for dynamic classes=====-->
+        <script>
+            // Make sure 'window.tailwind' exists
+            window.tailwind = window.tailwind || {};
+
+            // Then define your config
+            window.tailwind.config = {
+                safelist: [
+                    'text-green-500',
+                    'bg-green-500',
+                    'text-white',
+                    'bg-white',
+                    'text-red-500',
+                    'bg-red-500',
+                    'text-black',
+                    'bg-black'
+                ]
+            }
+        </script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    }
+
+    // Inline sample data for menu categories
+    // If you want different background colors, replace "red-500", "green-500", etc.
+    // with either Tailwind color classes or your own hex codes in a helper method.
+    var menu = new List<dynamic>
+    {
+        new {
+            Id = 1,
+            Slug = "sandwiches",
+            Img = Url.Content("~/img/Untitled design (7).png"),
+            Color = "#009246",  // A Tailwind utility class
+            BColor = "white",
+            Title = "Sandwicha t'Lezeqme",
+            Desc = "Gatume sakt e me dashni, qito sandwicha t'forta s'ka shanc mos me t'pëlqy!"
+        },
+        new {
+            Id = 2,
+            Slug = "burgers",
+            Img = Url.Content("~/img/m2.png"),
+            Color = "white",      // White background
+            BColor = "black",
+            Title = "Hamburgera Juicy",
+            Desc = "Shije qe t’mbet n’mendje, Mish i pjekun perfekt, qe ta mbush barkun. Hajde provoje!"
+        },
+        new {
+            Id = 3,
+            Slug = "pizza",
+            Img = Url.Content("~/img/m3.png"),
+            Color = "#ce2b37",    // Red background
+            BColor = "white",
+            Title = "Pizza Që T’Shkrin",
+            Desc = "E hollë, krispy e përmbushun me Kaçkavall – veç nji kafshatë e se ndron mo!"
+        },
+    };
+}
+
+<style>
+    .container{
+        width: auto;
+    }
+
+    .explore-btn {
+        /* Smooth transition */
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+        .explore-btn:hover {
+            /* Slightly reduce brightness (10%) */
+            filter: brightness(0.9);
+            /* Optional: slightly scale up */
+            transform: scale(1.05);
+        }
+
+      /* For the green Pastas card */
+    .sandwiches-corner {
+        /* Default (desktop or larger) => top-left & bottom-left corners = 30px */
+        border-radius: 30px 0 0 30px;
+    }
+
+    /* For the red Pizza card */
+    .pizza-corner {
+        /* Default (desktop or larger) => top-right & bottom-right corners = 30px */
+        border-radius: 0 30px 30px 0;
+    }
+
+    /* If you want to change corners on smaller screens (below 768px) */
+    @@media (max-width: 767.98px) {
+        .sandwiches-corner {
+            /* top-left & top-right = 30px at smaller screens */
+            border-radius: 30px 30px 0 0 !important;
+        }
+        .pizza-corner {
+           
+            border-radius: 0 0 30px 30px !important;
+        }
+
+        .menu-card {
+            transform: translateX(-20px);
+            opacity: 1;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+            .menu-card:nth-child(even) {
+                transform: translateX(20px);
+            }
+    }
+</style>
+
+ 
+<div class="p-16 lg:px-20 xl:px-40 flex flex-col md:flex-row mt-28">
+    @foreach (var category in menu)
+    {
+        // If it's the green "pastas" card
+        var cornerClass = "";
+        if (category.Slug == "sandwiches")
+        {
+            cornerClass = "sandwiches-corner";
+        }
+        // If it's the red "pizza" card
+        else if (category.Slug == "pizza")
+        {
+            cornerClass = "pizza-corner";
+        }
+        else
+        {
+            cornerClass = "burger-corner";
+        }
+
+        <a href="/menu/@category.Slug"
+           class="@($"{category.Color} {cornerClass} menu-card relative flex-1 min-h-[300px] flex items-center p-8 overflow-hidden")"
+           style="background-color: @category.Color;">
+
+            <!-- LEFT SIDE: Text content -->
+            <div class="max-w-[60%] z-10 text-@category.BColor">
+                <h1 class="uppercase font-bold text-3xl mb-4">@category.Title</h1>
+                <p class="text-sm mb-4">@category.Desc</p>
+                <!-- Add "explore-btn" for the hover effect -->
+                <button class="explore-btn bg-@category.BColor py-2 px-4 rounded-md"
+                        style="color: @category.Color;">
+                    Eksploro
+                </button>
+            </div>
+
+            <!-- RIGHT SIDE: The image is absolutely positioned -->
+            <img src="@category.Img"
+                 alt="@category.Title"
+                 class="absolute right-0 sm:h-64 md:h-[80%] object-contain" />
+        </a>
+    }
+</div>

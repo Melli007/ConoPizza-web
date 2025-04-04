@@ -1,0 +1,561 @@
+﻿@model ConoPizzaWeb.Models.Cart.Cart
+
+@{
+    ViewData["Title"] = "Shporta";
+}
+
+@section Cart {
+    <!-- Optional custom styles for the cart page -->
+   <style>
+        /* Cart container */
+        .cart-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--first-color);
+            text-align: center;
+            margin: 8rem 0 2rem;
+            text-transform: uppercase;
+        }
+
+        /* Cart item card */
+        .cart-item-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-item-image {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 1rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-size,
+        .cart-item-extras {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .cart-item-actions {
+            margin-top: 1rem;
+            width: 100%;
+            text-align: right;
+        }
+
+        .Left__img{
+            display:flex;
+            align-items:start;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.375rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline-danger {
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            background: none;
+            margin-top:1rem;
+        }
+
+            .btn-outline-danger:hover {
+                background-color: #dc3545;
+                color: white;
+            }
+
+        .btn-refresh {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            color: #333;
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+
+            .btn-refresh:hover {
+                background-color: #e7e7e7;
+            }
+
+        .btn-primary {
+            display: flex;
+            justify-content: center;
+            background-color: var(--first-color);
+            border: 1px solid var(--first-color);
+            color: white;
+            width: 100%;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--first-color-alt);
+                border-color: var(--first-color-alt);
+            }
+
+        /* Cart total box */
+        .cart-total-box {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #fff;
+            margin-top: 2rem;
+        }
+
+            .cart-total-box h4 {
+                margin-bottom: 1rem;
+                text-transform: uppercase;
+                color: #555;
+            }
+
+        /* alert-info */
+        .alert-info {
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            background-color: var(--first-color-alt);
+            color: white;
+            max-width: 600px; /* Match cart-container width */
+            margin: 2rem auto; /* Center horizontally */
+        }
+
+        .cmimi{
+            margin: .50rem 0rem;
+        }
+
+        /* Checkout Modal Styles */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 1rem;
+            }
+
+        .total-summary {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align:center;
+        }
+
+        .grand-total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--first-color);
+            margin-top: 1rem;
+        }
+
+        .total__title{
+            margin-bottom: 2rem;
+        }
+
+        @@media (min-width: 1024px) {
+            .cart-container {
+                max-width: 1200px;
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 2rem;
+                align-items: start;
+            }
+
+                .cart-container .alert-info {
+                    grid-column: 1 / -1; /* Span full width of grid */
+                    max-width: 600px; /* Maintain same width as mobile */
+                    margin: 2rem auto; /* Keep centered */
+                }
+
+            .cart-items-wrapper {
+                grid-column: 1;
+            }
+
+            .cart-total-box {
+                grid-column: 2;
+                margin-top: 0;
+                align-self: start;
+                position: sticky;
+                top: 1rem;
+            }
+        }
+
+        /* Responsive design */
+        @@media (min-width: 576px) {
+        .cart-item-card
+        {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .cart-item-actions {
+            margin-top: 0;
+            width: 56%;
+            text-align: right;
+        }
+
+        }
+    </style>
+}
+
+<!-- Add this modal HTML before the closing </div> of cart-container -->
+<div id="checkoutModal" class="checkout-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 class="total__title">Paguan @(Model.Total.ToString("0.00"))€ mbas dërgesës</h2>
+        <form id="checkoutForm">
+            <div class="form-group">
+                <label for="name">Emri:</label>
+                <input type="text" id="name" name="name" placeholder="...Kastriot" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Numri i telefonit:</label>
+                <input type="tel" id="phone" name="phone" placeholder="048-577-755" maxlength="11" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Lokacioni:</label>
+                <textarea id="address" name="address" placeholder="...Rruga dhe Lagjja" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Porosit</button>
+        </form>
+    </div>
+</div>
+
+<h2 class="page-title">Porosia Juaj</h2>
+<div class="cart-container">
+
+    <div class="cart-items-wrapper">
+    @if (Model.Items.Any())
+    {
+        <!-- Loop over each item in the cart -->
+        @foreach (var item in Model.Items)
+        {
+                <div class="cart-item-card" id="cart-item-@item.ProductId">
+                <!-- LEFT: Image -->
+                <div class="Left__img">
+                    <img src="@item.ImageUrl" alt="@item.Title" class="cart-item-image" />
+
+                    <!-- MIDDLE: Title, size, extras -->
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">
+                            @item.Title (@item.Quantity)
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                        {
+                                @if (item.SelectedSize == "Regular")
+                                {
+       
+                                }
+                                else
+                                {
+                                    <div class="cart-item-size">
+                                        Madhësia: @item.SelectedSize
+                                    </div>
+                                }
+                        }
+
+                        @if (item.Extras != null && item.Extras.Any())
+                        {
+                            <div class="cart-item-extras">
+                                @foreach (var addon in item.Extras)
+                                {
+                                        <span>@addon.ExtraName (@addon.Price)€</span>
+                                    @if(addon != item.Extras.Last())
+                                    {
+                                            @:,
+                                    }
+                                }
+
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- RIGHT: Price, total, remove button -->
+                <div class="cart-item-actions">
+                    <div class="cmimi">Çmimi: <strong>@item.UnitPrice.ToString("0.00")€</strong></div>
+                    <div class="totali">Totali: <strong>@item.LineTotal.ToString("0.00")€</strong></div>
+
+                    <!-- Edit button: links user back to Product/Index with that productId -->
+                    <a asp-controller="Product" asp-action="Index" asp-route-id="@item.ProductId" asp-route-editItemId="@item.CartItemId"
+                       class="btn btn-outline-danger btn-sm mt-2" alt="Edito">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+
+                        <!-- Remove button -->
+                        <button class="btn btn-outline-danger btn-sm mt-2"
+                                onclick="removeFromCart(@item.ProductId)" alt="Fshi">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+
+                </div>
+            </div>
+        }
+     }
+  </div> <!-- Close cart-items-wrapper -->
+   
+  @if (Model.Items.Any())
+    {
+        <!-- Cart summary card at the bottom -->
+        <div class="cart-total-box mt-4">
+            <h4>Totali i Shportës</h4>
+            <p class="mb-2 total-items" style="margin-bottom:.50rem;">Sasia e produkteve: @Model.TotalItems</p>
+            <p class="mb-3 total-price" style="margin-bottom:1rem;">Totali: @Model.Total.ToString("0.00")€</p>
+
+            <!-- Refresh / Recalculate -->
+            <button class="btn btn-refresh w-100" onclick="location.reload()">
+                FRESKO SHPORTËN
+            </button>
+
+            <!-- Checkout button -->
+            <a href="#" class="btn btn-primary w-100" id="checkoutButton">
+                POROSIT
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="alert-info">
+            Shporta juaj është bosh.
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+
+    <script>
+        // Build a JS array "cartItems" from your Razor model.
+        // Now we include "selectedSize" for each item.
+        const cartItems = [
+        @foreach (var item in Model.Items)
+        {
+            // Convert item.Extras (list of CartItemExtra) into a JSON array string.
+            var extrasJson = "[]";
+            if (item.Extras != null && item.Extras.Count > 0)
+            {
+                extrasJson = "[" + string.Join(",", item.Extras.Select(ex =>
+                    "{ \"ExtraName\": \"" + ex.ExtraName + "\", \"ExtraPrice\": "
+                        + ex.Price.ToString(System.Globalization.CultureInfo.InvariantCulture) + " }"
+                )) + "]";
+            }
+
+            @: {
+            @:     "productId": @item.ProductId,
+            @:     "quantity": @item.Quantity,
+            @:     "unitPrice": @item.UnitPrice.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            @:     "selectedSize": "@item.SelectedSize",
+            @:     "extras": @Html.Raw(extrasJson)
+            @: },
+        }
+        ];
+
+            function removeFromCart(productId) {
+            fetch('/Product/RemoveFromCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': '@Antiforgery.GetAndStoreTokens(ViewContext.HttpContext).RequestToken'
+                },
+                body: JSON.stringify({ productId: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 1️⃣ Remove the item from UI with fade effect
+                    let cartItem = document.getElementById("cart-item-" + productId);
+                     cartItem.remove();
+                     updateCartSummary(data.totalItems, data.totalPrice);
+                } else {
+                    alert("Failed to remove item.");
+                }
+            })
+            .catch(error => console.error("Error removing item:", error));
+        }
+
+
+            function updateCartSummary(totalItems, totalPrice) {
+            // 🛒 1️⃣ Update the cart counter
+            let cartCounter = document.querySelector(".counter");
+            if (cartCounter) {
+                cartCounter.textContent = totalItems;
+            }
+
+            // 💰 2️⃣ Update total items and total price
+            let totalItemsElement = document.querySelector(".total-items");
+            let totalPriceElement = document.querySelector(".total-price");
+
+            if (totalItemsElement) totalItemsElement.textContent = "Sasia e produkteve: " + totalItems;
+            if (totalPriceElement) totalPriceElement.textContent = "Totali: " + totalPrice.toFixed(2) + "€";
+
+                   // 🚨 If cart is empty, reload the page
+                if (totalItems === 0) {
+                console.log("Cart is empty. Refreshing page...");
+                location.reload(); // ✅ Refresh the page to update UI
+                }
+        }
+
+
+
+
+        window.addEventListener('DOMContentLoaded', function() {
+            // Modal elements
+            const modal = document.getElementById('checkoutModal');
+            const checkoutBtn = document.getElementById('checkoutButton');
+            const closeBtn = document.querySelector('.close-modal');
+            const checkoutForm = document.getElementById('checkoutForm');
+            const phoneInput = document.getElementById('phone');
+
+            if (!modal) { console.error("Modal not found."); }
+            if (!checkoutBtn) { console.error("Checkout button not found."); }
+            if (!closeBtn) { console.error("Close button not found."); }
+            if (!checkoutForm) { console.error("Checkout form not found."); }
+            if (!phoneInput) { console.error("Phone input not found."); }
+
+            // Open modal on checkout button click
+            if (checkoutBtn && modal) {
+                checkoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            }
+
+            // Close modal on close button click
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside modal content
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Format phone input: allow only digits, max 9 digits; insert dashes automatically.
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    let input = this.value.replace(/\D/g, '');
+                    if (input.length > 9) {
+                        input = input.substring(0, 9);
+                    }
+                    if (input.length > 6) {
+                        input = input.substring(0, 3) + '-' + input.substring(3, 6) + '-' + input.substring(6);
+                    } else if (input.length > 3) {
+                        input = input.substring(0, 3) + '-' + input.substring(3);
+                    }
+                    this.value = input;
+                });
+            }
+
+            // Handle checkout form submission: send order data to Order/CreateOrder.
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Build the order object. Include cartItems (which now have selectedSize).
+                    const orderData = {
+                        name: document.getElementById('name').value,
+                        phone: document.getElementById('phone').value,
+                        address: document.getElementById('address').value,
+                        total: parseFloat("@Model.Total"),
+                        items: cartItems
+                    };
+
+                    console.log('Order data:', orderData);
+
+                    fetch('/Order/CreateOrder', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': '@Antiforgery.GetAndStoreTokens(ViewContext.HttpContext).RequestToken'
+                        },
+                        body: JSON.stringify(orderData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Redirect to the Checkout page with the new orderId.
+                            window.location.href = '/Order/Checkout?orderId=' + data.orderId;
+                        } else {
+                            showAlert("Gabim gjatë procesimit të porosisë.", error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Order submission error:", err);
+                        showAlert("Gabim gjatë dërgimit të porosisë." , error);
+                    });
+                });
+            }
+        });
+    </script>
+}

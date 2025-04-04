@@ -1,0 +1,319 @@
+﻿/* Base Styles */
+.checkout-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 4rem;
+}
+
+.checkout-left {
+    flex: 1;
+    min-width: 300px;
+}
+
+.checkout-right {
+    flex: 1;
+    max-width: 500px;
+}
+
+/* Order Details Card */
+.order-details-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+    .order-details-card h2 {
+        font-size: 1.5rem;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+    }
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.detail-label {
+    color: #718096;
+    font-weight: 500;
+}
+
+.detail-value {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+/* Status Timeline */
+.status-timeline {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Status Steps */
+.status-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    flex: 1;
+    min-width: 120px; /* Ensures responsiveness */
+    padding: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.6; /* Default opacity for undone steps */
+}
+
+    .status-step.done {
+        opacity: 1; /* Fully visible for completed steps */
+        color: #22c55e; /* Green color for completed steps */
+    }
+
+    .status-step.inProgress {
+        opacity: 1; /* Fully visible for in-progress steps */
+        color: #3b82f6; /* Blue color for in-progress steps */
+    }
+
+    .status-step.undone {
+        opacity: 0.6; /* Dimmed for undone steps */
+        color: #6b7280; /* Gray color for undone steps */
+    }
+
+/* Step Icons */
+.step-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f7fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    z-index: 2;
+}
+
+    .step-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+/* Checked Icon */
+.checked-icon {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* Step Labels */
+.step-label {
+    color: #2d3748;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+/* Hide last step's line */
+.status-step:last-child .step-line {
+    display: none;
+}
+
+
+.inProgress .step-icon {
+    background: #bee3f8;
+    animation: pulse 1.5s infinite;
+}
+
+.undone .step-icon {
+    background: #f7fafc;
+    opacity: 0.6;
+}
+
+
+/* Order Summary Card */
+.order-summary-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 2rem;
+}
+
+    .order-summary-card h3 {
+        font-size: 1.25rem;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+    }
+
+.checkout-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Adds horizontal scrolling if needed */
+}
+
+    .checkout-table th,
+    .checkout-table td {
+        padding: 1rem;
+        font-size: 14px; /* Slightly smaller font for mobile */
+        text-align: left;
+        border-bottom: 1px solid #edf2f7;
+    }
+
+    .checkout-table th {
+        background: #f7fafc;
+        color: #718096;
+        font-weight: 600;
+    }
+
+    .checkout-table tfoot td {
+        font-weight: 700;
+        background: #f7fafc;
+    }
+
+.total-label {
+    color: #718096;
+}
+
+.total-amount {
+    color: #2d3748;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(0.95);
+    }
+}
+
+.status-step.inProgress .step-icon {
+    animation: pulse 1.5s infinite;
+}
+
+/* Style for the canceled status */
+.status__anuluar {
+    display: none;
+    color: #ef4444; /* Red color for canceled status */
+    font-weight: bold;
+    width:100%;
+    justify-content:center;
+}
+.X-icon{
+    width: 100px;
+}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .checkout-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .checkout-right {
+                max-width: 100%;
+            }
+
+
+            .status-timeline {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .status-step {
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: left;
+                width: 100%;
+            }
+
+            .step-icon {
+                margin-right: 1rem;
+                margin-bottom: 0;
+            }
+
+            .step-label {
+                font-size: 16px;
+            }
+
+            /* Vertical Line for Mobile */
+            .step-line {
+                position: absolute;
+                left: 24px;
+                top: 60px;
+                height: 40px;
+                width: 2px;
+                background: #e2e8f0;
+            }
+
+            .status-step:last-child .step-line {
+                display: none;
+            }
+
+            .order-summary-card {
+                padding: 1rem;
+                width: 100%;
+                max-width: none; /* Ensures it takes full width */
+            }
+
+            .checkout-table th,
+            .checkout-table td {
+                padding: 0.5rem;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .order-summary-card {
+                padding: 1rem;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .checkout-table {
+                overflow-x: auto; /* Enables scrolling if needed */
+                white-space: nowrap;
+            }
+
+                .checkout-table th,
+                .checkout-table td {
+                    font-size: 9px;
+                    padding: 0.2rem;
+                }
+        }
+
+        @media (max-width: 375.97px) {
+
+            .checkout-table th,
+            .checkout-table td {
+                font-size: 7px;
+                padding: 0.1rem;
+            }
+        }
+
+

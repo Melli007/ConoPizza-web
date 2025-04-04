@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ConoPizzaWeb.Models.Orders.Order>
+@using ConoPizzaWeb.Models.Orders
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    ViewData["Title"] = "Statusi i Porosive - " + ViewBag.Status;
+}
+
+@section OrderDetails {
+    <link href="~/css/orderdetail.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <div class="order__h1">
+        <h1>Porosit në statusin: @ViewBag.Status</h1>
+    </div>
+
+    @foreach (var order in Model)
+    {
+        <div class="order-card">
+            <div class="order-header" onclick="toggleDetails(@order.OrderId)">
+                <div>
+                    <div class="text-sm text-gray-500">Order ID</div>
+                    <div class="font-medium">#@order.OrderId</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Konsumatori</div>
+                    <div>@order.ConsumerName</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Data</div>
+                    <div>@order.OrderDate.ToLocalTime().ToString("g")</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Totali</div>
+                    <div class="font-medium">@order.Total.ToString("0.00")€</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Statusi</div>
+                    <div class="badge badge-@order.Status.ToString().ToLower()">@order.Status.ToString()</div>
+                </div>
+                <div class="toggle-icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="order-details" id="details_@order.OrderId" style="display: none;">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-medium mb-2">Informacionet E Konsumatorit</h3>
+                        <div class="space-y-1">
+                            <div><span class="text-gray-600">Numri:</span> @order.PhoneNumber</div>
+                            <div><span class="text-gray-600">Adresa:</span> @order.Address</div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <select class="select-status" style="width:20%;"
+                                onchange="updateStatus(@order.OrderId, this.value)">
+                            <option value="Konfirmo" selected="@(order.Status == OrderStatus.Konfirmo)">Duke Konfirmuar</option>
+                            <option value="NPërgaditje" selected="@(order.Status == OrderStatus.NPërgaditje)">Duke Përgatitur</option>
+                            <option value="Rruges" selected="@(order.Status == OrderStatus.Rruges)">Rrugës</option>
+                            <option value="Arritur" selected="@(order.Status == OrderStatus.Arritur)">Porosia Ka Ardhur</option>
+                            <option value="Paguar" selected="@(order.Status == OrderStatus.Paguar)">Paguar</option>
+                        </select>
+                        <button class="btn btn-danger"
+                                onclick="cancelOrder(@order.OrderId)">
+                            Cancel Order
+                        </button>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-medium mb-4">Porosia</h3>
+                <div class="product-list">
+                    <div class="product-item font-medium text-gray-500">
+                        <div>Produkti</div>
+                        <div>Extras</div>
+                        <div>Sasia</div>
+                        <div>Qmimi</div>
+                    </div>
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <div class="product-item">
+                            @if (item.SelectedSize == "Regular")
+                            {
+                                <div>@item.Product?.Title</div>
+                            }
+                            else
+                            {
+                                <div> @Html.Raw(item.Product?.Title + "/" + (!string.IsNullOrEmpty(item.SelectedSize) ? item.SelectedSize : "-"))</div>
+                            }
+                            <div>
+                                @if (item.SelectedExtras.Any())
+                                {
+                                    @string.Join(", ", item.SelectedExtras.Select(e => e.ExtraName))
+                                }
+                                else
+                                {
+                                    @("-")
+                                }
+                            </div>
+                            <div>@item.Quantity</div>
+                            <div>@(item.UnitPrice * item.Quantity)€</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/js/orderdetail.js"></script>
+}

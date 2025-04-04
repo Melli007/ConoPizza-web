@@ -1,0 +1,274 @@
+﻿@model IEnumerable<ConoPizzaWeb.Models.Orders.Order>
+@using ConoPizzaWeb.Models.Orders
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    ViewData["Title"] = "Admin Orders";
+}
+
+@section OrderDetails {
+    <link href="~/css/orderdetail.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <div class="order__h1">
+        <h1>Menagjimi i porosive</h1>
+    </div>
+
+    <!-- Filter Form -->
+    <div class="filter-wrapper marginB" id="myElement">
+        <button class="filter-toggle-btn btn-primary" onclick="toggleFilterDropdown()">
+            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+            Filtro
+        </button>
+
+        <div class="filter-container filter-dropdown" id="filterDropdown">
+            <button class="close-filter-btn" onclick="toggleFilterDropdown()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+
+            <form method="get" asp-action="OrderDetails">
+                <div class="date-filters">
+                    <div>
+                        <label for="startDate">Data Fillimit:</label>
+                        <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" />
+                    </div>
+                    <div>
+                        <label for="endDate">Data Mbarimit:</label>
+                        <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" />
+                    </div>
+                </div>
+
+                <div class="status-filter">
+                    <label for="status">Statusi:</label>
+                    <select id="status" name="status">
+                        <option value="">Të Gjitha</option>
+                        @foreach (var statusOption in Enum.GetValues(typeof(OrderStatus)))
+                        {
+                            <option value="@statusOption" selected="@(ViewBag.SelectedStatus == statusOption.ToString())">@statusOption</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-primary">Apliko Filtër</button>
+                    <button type="button" class="btn btn-danger" onclick="resetFilters()">Pastro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 1️⃣ A unique wrapper for all orders -->
+    <div id="ordersWrapper">
+    @foreach (var order in Model)
+    {
+        <div class="order-card">
+            <div class="order-header" onclick="toggleDetails(@order.OrderId)">
+                <div>
+                    <div class="text-sm text-gray-500">Order ID</div>
+                    <div class="font-medium">#@order.OrderId</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Konsumatori</div>
+                    <div>@order.ConsumerName</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Data</div>
+                    <div>@order.OrderDate.ToLocalTime().ToString("g")</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Totali</div>
+                    <div class="font-medium">@order.Total.ToString("0.00")€</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500">Statusi</div>
+                    <div class="badge badge-@order.Status.ToString().ToLower()">@order.Status.ToString()</div>
+                </div>
+                <div class="toggle-icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="order-details" id="details_@order.OrderId" style="display: none;">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-medium mb-2">Informacionet E Konsumatorit</h3>
+                        <div class="space-y-1">
+                            <div><span class="text-gray-600">Numri:</span> @order.PhoneNumber</div>
+                            <div><span class="text-gray-600">Adresa:</span> @order.Address</div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <select class="select-status" style="width:20%;" 
+                        onchange="updateStatus(@order.OrderId, this.value)">
+                            <option value="Konfirmo" selected="@(order.Status == OrderStatus.Konfirmo)">Duke Konfirmuar</option>
+                            <option value="NPërgaditje" selected="@(order.Status == OrderStatus.NPërgaditje)">Duke Përgatitur</option>
+                            <option value="Rruges" selected="@(order.Status == OrderStatus.Rruges)">Rrugës</option>
+                            <option value="Arritur" selected="@(order.Status == OrderStatus.Arritur)">Porosia Ka Ardhur</option>
+                            <option value="Paguar" selected="@(order.Status == OrderStatus.Paguar)">Paguar</option>
+                        </select>
+                        <button class="btn btn-danger" 
+                        onclick="cancelOrder(@order.OrderId)">
+                            Cancel Order
+                        </button>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-medium mb-4">Porosia</h3>
+                <div class="product-list">
+                    <div class="product-item font-medium text-gray-500">
+                        <div>Produkti</div>
+                        <div>Extras</div>
+                        <div>Sasia</div>
+                        <div>Qmimi</div>
+                    </div>
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <div class="product-item">
+                            @if (item.SelectedSize == "Regular")
+                            {
+                                <div>@item.Product?.Title</div>
+                            }
+                            else{
+                            <div> @Html.Raw(item.Product?.Title + "/" + (!string.IsNullOrEmpty(item.SelectedSize) ? item.SelectedSize : "-"))</div>
+                            }
+                            <div>
+                                @if (item.SelectedExtras.Any())
+                                {
+                                    @string.Join(", ", item.SelectedExtras.Select(e => e.ExtraName))
+                                }
+                                else
+                                {
+                                    @("-")
+                                }
+                            </div>
+                            <div>@item.Quantity</div>
+                            <div>@(item.UnitPrice * item.Quantity)€</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>
+
+@section Scripts {
+        <!-- 1️⃣ Make sure this path is correct in your app -->
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/orderdetail.js"></script>
+    <script>
+        // 1️⃣ Create hub connection
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/ordersHub")
+            .build();
+
+        // 2️⃣ Listen for full order object in "ReceiveOrder"
+        connection.on("ReceiveOrder", (order) => {
+            console.log("New Order arrived:", order);
+            addNewOrderToDOM(order);
+        });
+
+        connection.start()
+            .then(() => console.log("SignalR connected."))
+            .catch(err => console.error("Error connecting SignalR:", err));
+
+        // 3️⃣ Rebuild the entire "order-card" layout
+        function addNewOrderToDOM(order) {
+            const container = document.getElementById("ordersWrapper");
+            if (!container) return;
+
+            // Format date as local string
+            const localDate = new Date(order.orderDate).toLocaleString();
+
+            // Build the HTML
+            // - Notice we replicate the same structure you have in your Razor foreach
+            // - Use the same classes & IDs, especially so toggleDetails() still works
+            let orderHtml = `
+            <div class="order-card">
+                <div class="order-header" onclick="toggleDetails(${order.orderId})">
+                    <div>
+                        <div class="text-sm text-gray-500">Order ID</div>
+                        <div class="font-medium">#${order.orderId}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-500">Konsumatori</div>
+                        <div>${order.consumerName}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-500">Data</div>
+                        <div>${localDate}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-500">Totali</div>
+                        <div class="font-medium">${order.total.toFixed(2)}€</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-500">Statusi</div>
+                        <div class="badge badge-${order.status.toLowerCase()}">${order.status}</div>
+                    </div>
+                    <div class="toggle-icon">
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="order-details" id="details_${order.orderId}" style="display: none;">
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-2">Informacionet E Konsumatorit</h3>
+                            <div class="space-y-1">
+                                <div><span class="text-gray-600">Numri:</span> ${order.phoneNumber}</div>
+                                <div><span class="text-gray-600">Adresa:</span> ${order.address}</div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <select class="select-status" style="width:20%;"
+                                    onchange="updateStatus(${order.orderId}, this.value)">
+                                <option value="Konfirmo"    ${order.status == "Konfirmo"    ? "selected" : ""}>Duke Konfirmuar</option>
+                                <option value="NPërgaditje" ${order.status == "NPërgaditje" ? "selected" : ""}>Duke Përgatitur</option>
+                                <option value="Rruges"       ${order.status == "Rruges"       ? "selected" : ""}>Rrugës</option>
+                                <option value="Arritur"     ${order.status == "Arritur"     ? "selected" : ""}>Porosia Ka Ardhur</option>
+                                <option value="Paguar"      ${order.status == "Paguar"      ? "selected" : ""}>Paguar</option>
+                            </select>
+                            <button class="btn btn-danger" onclick="cancelOrder(${order.orderId})">
+                                Cancel Order
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-medium mb-4">Porosia</h3>
+                    <div class="product-list">
+                        <div class="product-item font-medium text-gray-500">
+                            <div>Produkti</div>
+                            <div>Extras</div>
+                            <div>Sasia</div>
+                            <div>Qmimi</div>
+                        </div>
+                        ${order.orderItems.map(item => `
+                            <div class="product-item">
+                                <div>${
+                                    // e.g.: "Pizza Diavola/Mesme" if size != "Regular"
+                                    item.selectedSize && item.selectedSize !== "Regular"
+                                        ? `${item.productTitle}/${item.selectedSize}`
+                                        : item.productTitle
+                                }</div>
+                                <div>${
+                                    item.selectedExtras && item.selectedExtras.length > 0
+                                      ? item.selectedExtras.map(e => e.extraName).join(", ")
+                                      : "-"
+                                }</div>
+                                <div>${item.quantity}</div>
+                                <div>${(item.unitPrice * item.quantity).toFixed(2)}€</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+            `;
+
+            // 4️⃣ Prepend so new orders appear at the top
+            container.insertAdjacentHTML('afterbegin', orderHtml);
+        }
+
+        // Your existing toggleDetails, updateStatus, cancelOrder, etc. remain unchanged
+    </script>
+}
