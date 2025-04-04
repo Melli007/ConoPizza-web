@@ -52,6 +52,8 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
+// Seed the admin user
+await DataSeeder.SeedAdminUser(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
