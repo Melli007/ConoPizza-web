@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR;      
 using ConoPizzaWeb.Hubs;
+using ConoPizzaWeb.Services;
 
 namespace ConoPizzaWeb.Controllers
 {
@@ -15,10 +16,12 @@ namespace ConoPizzaWeb.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHubContext<OrdersHub> _hubContext; // 1️⃣ Inject the hub context
-        public OrderController(ApplicationDbContext context, IHubContext<OrdersHub> hubContext)
+        private readonly SecureIdService _secureIdService;
+        public OrderController(ApplicationDbContext context, IHubContext<OrdersHub> hubContext, SecureIdService secureIdService)
         {
             _context = context;
             _hubContext = hubContext;
+            _secureIdService = secureIdService;
         }
 
         // POST: /Order/CreateOrder
@@ -105,38 +108,56 @@ namespace ConoPizzaWeb.Controllers
                 }).ToList()
             });
 
+            string encodedOrderId = _secureIdService.Encode(order.OrderId);
+
             // Return JSON with success and the new OrderId.
-            return Json(new { success = true, orderId = order.OrderId });
+            return Json(new { success = true, orderId = encodedOrderId });
         }
 
-        // GET: /Order/Checkout?orderId=123
+        // GET: /Order/Checkout?orderId=mO1VDLM8
         [HttpGet]
-        public async Task<IActionResult> Checkout(int orderId)
+        public async Task<IActionResult> Checkout(string orderId)
         {
+            // Decode the order ID
+            int? decodedOrderId = _secureIdService.Decode(orderId);
+
+            if (!decodedOrderId.HasValue)
+            {
+                return NotFound("Invalid order identifier");
+            }
+
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
                     .ThenInclude(oi => oi.SelectedExtras)
                 .Include(o => o.OrderItems)
                     .ThenInclude(oi => oi.Product)
-                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+                .FirstOrDefaultAsync(o => o.OrderId == decodedOrderId.Value);
 
             if (order == null)
             {
-                return NotFound();
+                return NotFound("Order not found");
             }
 
-            return View(order); // Pass the Order model to the Checkout view
+            return View(order);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetOrderStatus(int orderId)
+        public async Task<IActionResult> GetOrderStatus(string orderId)
         {
-            var order = await _context.Orders.FindAsync(orderId);
+            // Decode the order ID
+            int? decodedOrderId = _secureIdService.Decode(orderId);
+
+            if (!decodedOrderId.HasValue)
+            {
+                return NotFound("Invalid order identifier");
+            }
+
+            var order = await _context.Orders.FindAsync(decodedOrderId.Value);
             if (order == null)
             {
-                return NotFound();
+                return NotFound("Order not found");
             }
-            return Json(new { status = order.Status.ToString() });
+            return Json(new { status = order.Status.ToString()});
         }
     }
 

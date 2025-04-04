@@ -50,6 +50,14 @@ builder.Services.AddRazorPages();
 // 1️⃣ Add SignalR service
 builder.Services.AddSignalR();
 
+// Inside your Program.cs, add this to your service registration section
+builder.Services.AddSingleton<ConoPizzaWeb.Services.SecureIdService>(
+    new ConoPizzaWeb.Services.SecureIdService(
+        builder.Configuration["SecureIds:Salt"], // Optionally get salt from configuration
+        10 // Minimum hash length for secure IDs
+    )
+);
+
 var app = builder.Build();
 
 // Seed the admin user

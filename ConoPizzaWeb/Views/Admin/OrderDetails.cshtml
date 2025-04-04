@@ -3,6 +3,10 @@
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
 @{
     ViewData["Title"] = "Admin Orders";
+    int orderCounter = 0;
+    var ordersList = Model.ToList();
+
+    orderCounter = ordersList.Count;
 }
 
 @section OrderDetails {
@@ -62,11 +66,11 @@
     <div id="ordersWrapper">
     @foreach (var order in Model)
     {
-        <div class="order-card">
+            <div class="order-card" data-order-sequence="@orderCounter">
             <div class="order-header" onclick="toggleDetails(@order.OrderId)">
                 <div>
                     <div class="text-sm text-gray-500">Order ID</div>
-                    <div class="font-medium">#@order.OrderId</div>
+                    <div class="font-medium">#@(orderCounter--)</div>
                 </div>
                 <div>
                     <div class="text-sm text-gray-500">Konsumatori</div>

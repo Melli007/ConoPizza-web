@@ -196,7 +196,9 @@
 
         // Fetch the latest order status
         async function fetchOrderStatus() {
-            const orderId = @Model.OrderId;
+        // Use the encoded version of the orderId from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
             try {
                 const response = await fetch(`/Order/GetOrderStatus?orderId=${orderId}`);
                 const data = await response.json();
