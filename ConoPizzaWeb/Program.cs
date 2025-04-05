@@ -60,8 +60,9 @@ builder.Services.AddSingleton<ConoPizzaWeb.Services.SecureIdService>(
 
 var app = builder.Build();
 
-// Seed the admin user
+// Seed the admin user and categories
 await DataSeeder.SeedAdminUser(app.Services);
+await DataSeeder.SeedCategories(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

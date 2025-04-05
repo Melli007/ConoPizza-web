@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ConoPizzaWeb.Models.Categories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConoPizzaWeb.Data
@@ -52,6 +53,52 @@ namespace ConoPizzaWeb.Data
                         string.Join(", ", result.Errors.Select(e => e.Description)));
                 }
             }
+        }
+
+        public static async Task SeedCategories(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+            // Check if categories already exist
+            if (await dbContext.Categories.AnyAsync())
+            {
+                logger.LogInformation("Categories already seeded.");
+                return;
+            }
+
+            // Define categories
+            var categories = new List<Category>
+            {
+                new Category
+                {
+                    Name = "Pizza",
+                    Description = "All Pizza Items",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                },
+                new Category
+                {
+                    Name = "Burgers",
+                    Description = "All Burger Items",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                },
+                new Category
+                {
+                    Name = "Sandwiches",
+                    Description = "All Sandwich Items",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                }
+            };
+
+            // Add categories to the database
+            await dbContext.Categories.AddRangeAsync(categories);
+            await dbContext.SaveChangesAsync();
+
+            logger.LogInformation("Categories seeded successfully. Added {Count} categories.", categories.Count);
         }
     }
 }
