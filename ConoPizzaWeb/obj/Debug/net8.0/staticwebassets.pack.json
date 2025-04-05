@@ -1,0 +1,465 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ConoPizzaWeb.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ConoPizzaWeb.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\css\\Product.css",
+      "PackagePath": "staticwebassets\\css\\Product.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\css\\button.css",
+      "PackagePath": "staticwebassets\\css\\button.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\css\\swiper-bundle.min.css",
+      "PackagePath": "staticwebassets\\css\\swiper-bundle.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\Untitled design (2).png",
+      "PackagePath": "staticwebassets\\img\\Untitled design (2).png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\Untitled design (7).png",
+      "PackagePath": "staticwebassets\\img\\Untitled design (7).png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\about-img.png",
+      "PackagePath": "staticwebassets\\img\\about-img.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\cart.png",
+      "PackagePath": "staticwebassets\\img\\cart.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\contact-img.png",
+      "PackagePath": "staticwebassets\\img\\contact-img.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\favicon.png",
+      "PackagePath": "staticwebassets\\img\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\footer-card-1.png",
+      "PackagePath": "staticwebassets\\img\\footer-card-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\footer-card-2.png",
+      "PackagePath": "staticwebassets\\img\\footer-card-2.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\footer-card-3.png",
+      "PackagePath": "staticwebassets\\img\\footer-card-3.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\footer-card-4.png",
+      "PackagePath": "staticwebassets\\img\\footer-card-4.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-board.png",
+      "PackagePath": "staticwebassets\\img\\home-board.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-leaf-1.png",
+      "PackagePath": "staticwebassets\\img\\home-leaf-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-leaf-2.png",
+      "PackagePath": "staticwebassets\\img\\home-leaf-2.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-mushroom.png",
+      "PackagePath": "staticwebassets\\img\\home-mushroom.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-olive.png",
+      "PackagePath": "staticwebassets\\img\\home-olive.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-pepperoni.png",
+      "PackagePath": "staticwebassets\\img\\home-pepperoni.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-pizza.png",
+      "PackagePath": "staticwebassets\\img\\home-pizza.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\home-tomato.png",
+      "PackagePath": "staticwebassets\\img\\home-tomato.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\logo-pizza.svg",
+      "PackagePath": "staticwebassets\\img\\logo-pizza.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\m1.png",
+      "PackagePath": "staticwebassets\\img\\m1.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\m2.png",
+      "PackagePath": "staticwebassets\\img\\m2.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\m3.png",
+      "PackagePath": "staticwebassets\\img\\m3.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\popular-1.png",
+      "PackagePath": "staticwebassets\\img\\popular-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\popular-2.png",
+      "PackagePath": "staticwebassets\\img\\popular-2.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\popular-3.png",
+      "PackagePath": "staticwebassets\\img\\popular-3.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\popular-dish.png",
+      "PackagePath": "staticwebassets\\img\\popular-dish.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\product-1.png",
+      "PackagePath": "staticwebassets\\img\\product-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\product-2.png",
+      "PackagePath": "staticwebassets\\img\\product-2.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\product-3.png",
+      "PackagePath": "staticwebassets\\img\\product-3.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\product-4.png",
+      "PackagePath": "staticwebassets\\img\\product-4.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\product-5.png",
+      "PackagePath": "staticwebassets\\img\\product-5.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-cheese.png",
+      "PackagePath": "staticwebassets\\img\\recipe-cheese.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-flour.png",
+      "PackagePath": "staticwebassets\\img\\recipe-flour.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-img.png",
+      "PackagePath": "staticwebassets\\img\\recipe-img.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-meat.png",
+      "PackagePath": "staticwebassets\\img\\recipe-meat.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-sauces.png",
+      "PackagePath": "staticwebassets\\img\\recipe-sauces.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\recipe-tomato.png",
+      "PackagePath": "staticwebassets\\img\\recipe-tomato.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\size.png",
+      "PackagePath": "staticwebassets\\img\\size.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-cheese.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-cheese.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-leaf.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-leaf.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-mushroom.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-mushroom.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-onion.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-onion.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-pizza.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-pizza.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\img\\sticker-tomato.svg",
+      "PackagePath": "staticwebassets\\img\\sticker-tomato.svg"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\js\\scrollreveal.min.js",
+      "PackagePath": "staticwebassets\\js\\scrollreveal.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\js\\swiper-bundle.min.js",
+      "PackagePath": "staticwebassets\\js\\swiper-bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\ConoPizzaWeb\\ConoPizzaWeb\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ConoPizzaWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ConoPizzaWeb.props",
+      "PackagePath": "build\\ConoPizzaWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ConoPizzaWeb.props",
+      "PackagePath": "buildMultiTargeting\\ConoPizzaWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ConoPizzaWeb.props",
+      "PackagePath": "buildTransitive\\ConoPizzaWeb.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
