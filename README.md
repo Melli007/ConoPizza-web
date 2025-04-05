@@ -2,7 +2,9 @@
 
 ## Overview
 
-Welcome to the MVC Food Delivery Website repository! This project is a web application developed using ASP.NET MVC, designed to facilitate online food ordering and delivery services. It provides a seamless platform for customers to browse menus, place orders, and track deliveries, while enabling restaurant owners to manage orders efficiently.
+Welcome to the MVC Food Delivery Website repository! This project is a web application developed using ASP.NET MVC, designed to facilitate online food ordering and delivery services. It provides a seamless platform for customers to browse menus, place orders, and track deliveries, while enabling restaurant owners to manage orders efficiently and is fully responsive.
+
+#### To see how the application looks and works, go to the "Video of the app" folder in the repository and download the raw video, as it is too large to be hosted directly on GitHub.
 
 ## Features
 
